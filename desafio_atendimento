@@ -1,0 +1,28 @@
+USE [20230206_desafio_atendimento];
+
+CREATE TABLE tb_cliente(
+	nome VARCHAR(100) NOT NULL,
+	sobrenome VARCHAR(100),
+	endereco VARCHAR(100),
+	complemento VARCHAR(50),
+	telefone INTEGER NOT NULL,
+	email VARCHAR(50) NOT NULL);
+
+CREATE TABLE tb_atendente(
+	ID_funcionario INTEGER NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	setor VARCHAR (100) NOT NULL,
+	data_admissao DATE NOT NULL,
+	gestor VARCHAR (100) NOT NULL
+	PRIMARY KEY (ID_funcionario));
+
+CREATE TABLE tb_atendimento(
+	tipo_atendimento VARCHAR(50) NOT NULL,
+	descrição VARCHAR(500) NOT NULL,
+	status BIT NOT NULL,
+	data_abertura DATE NOT NULL,
+	data_encerramento DATE NOT NULL,
+	matricula_funcionario INTEGER,
+	CONSTRAINT FK_ID_funcionario FOREIGN KEY (matricula_funcionario)
+		REFERENCES tb_atendente (ID_funcionario),
+	protocolo INTEGER NOT NULL IDENTITY(1,1));
